@@ -11,7 +11,7 @@ import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 
-public class Main{
+public class Index{
 	public static void main(String[] argsv) throws IOException{
 		HashMap<String,ArrayList<Long>> index = new HashMap<String,ArrayList<Long>>(); 
 		ArrayList<Long> temp_list = new ArrayList<Long>();
