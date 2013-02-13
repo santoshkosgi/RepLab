@@ -13,7 +13,7 @@ import java.util.TreeMap;
 
 public class Index{
 	public static void main(String[] argsv) throws IOException{
-		HashMap<String,ArrayList<Long>> index = new HashMap<String,ArrayList<Long>>(); 
+		TreeMap<String,ArrayList<Long>> index = new TreeMap<String,ArrayList<Long>>(); 
 		ArrayList<Long> temp_list = new ArrayList<Long>();
 		TreeMap<String,Integer> files_tree = new TreeMap<String,Integer>();
 		File folder = new File("/home/santoshkosgi/Dropbox/Replab/data/");
