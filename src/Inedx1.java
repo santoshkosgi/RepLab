@@ -4,11 +4,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 
@@ -59,14 +56,14 @@ public class Inedx1{
 			long pos;
 			long temp;
 			int count=0;
-			String s;
+			String s,tag;
 			int pos_list_size;
 			pos = input.getFilePointer();
 			while((line = input.readLine())!=null){
 				System.out.println(count++);
 				String l = line.replaceAll("\\s+", " ");
 				String l1 = l.replaceAll("[^\\x00-\\x7F]", "");
-				StringTokenizer st = new StringTokenizer(l1,"  \n");
+				StringTokenizer st = new StringTokenizer(l1," \n{}+$%&^*//(|=!_-;.)[]\",:?<>\n");
 				String k = new String();
 				String token;
 				while(st.hasMoreTokens()) {
@@ -76,49 +73,89 @@ public class Inedx1{
 					}
 				}
 				k = k.toLowerCase();
+				System.out.println(k);
 				if(!k.isEmpty()){
 					List<TaggedToken> pos_list = t1.tokenizeAndTag(k);
 					pos_list_size = pos_list.size();
 					for(int j =0;j<pos_list_size;j++){
+						if(pos_list.get(j).token.compareTo("#windows8")==0){
+							System.out.println("aaaa"+pos_list.get(j).tag);
+						}
 						if(pos_list.get(j).tag.compareTo("NN")==0||pos_list.get(j).tag.compareTo("NNS")==0||pos_list.get(j).tag.compareTo("NNP")==0||pos_list.get(j).tag.compareTo("NNPS")==0){
 							if(j+1<pos_list_size){
 								if(pos_list.get(j+1).tag.compareTo("NN")==0||pos_list.get(j+1).tag.compareTo("NNS")==0||pos_list.get(j+1).tag.compareTo("NNP")==0||pos_list.get(j+1).tag.compareTo("NNPS")==0){
 									if(j+2<pos_list_size){
 										if(pos_list.get(j+2).tag.compareTo("NN")==0||pos_list.get(j+2).tag.compareTo("NNS")==0||pos_list.get(j+2).tag.compareTo("NNP")==0||pos_list.get(j+2).tag.compareTo("NNPS")==0){
 											//three matching
+											tag = pos_list.get(j).tag+" "+pos_list.get(j+1).tag+" "+pos_list.get(j+2).tag;
+											System.out.println(tag);
 											s = pos_list.get(j).token+" "+pos_list.get(j+1).token+" "+pos_list.get(j+2).token;
-											j = j+3;
-											compute_index(s.replace("#","").replaceAll("\\s+", " "),pos);
+											compute_index(s,pos);
+											System.out.println(s);
+											s = pos_list.get(j).token+" "+pos_list.get(j+1).token;//two bi words
+											compute_index(s,pos);
+											s = pos_list.get(j+1).token+" "+pos_list.get(j+2).token;
+											compute_index(s,pos);
+											s = pos_list.get(j).token;//three uni grams
+											compute_index(s,pos);
+											s = pos_list.get(j+1).token;
+											compute_index(s,pos);
+											s = pos_list.get(j+2).token;
+											compute_index(s,pos);
+											j = j+2;
 										}
 										else{
 											//two matching
+											tag = pos_list.get(j).tag+" "+pos_list.get(j+1).tag;
+											System.out.println(tag);
 											s = pos_list.get(j).token+" "+pos_list.get(j+1).token;
-											j = j+3;
-											compute_index(s.replace("#","").replaceAll("\\s+", " "),pos);
+											compute_index(s,pos);
+											System.out.println(s);
+											s = pos_list.get(j).token;//two uni grams
+											compute_index(s,pos);
+											s = pos_list.get(j+1).token;
+											compute_index(s,pos);
+											j = j+1;
 										}
 									}
 									else{
 										//two matching
+										tag = pos_list.get(j).tag+" "+pos_list.get(j+1).tag;
+										System.out.println(tag);
 										s = pos_list.get(j).token+" "+pos_list.get(j+1).token;
-										j = j+2;
-										compute_index(s.replace("#","").replaceAll("\\s+", " "),pos);
+										compute_index(s,pos);
+										System.out.println(s);
+										s = pos_list.get(j).token;//two uni grams
+										compute_index(s,pos);
+										s = pos_list.get(j+1).token;
+										compute_index(s,pos);
+										//j = j+1;
 									}
 								}
 								else{
 									//one matching
+									tag = pos_list.get(j).tag;
+									System.out.println(tag);
 									s = pos_list.get(j).token;
-									compute_index(s.replace("#","").replaceAll("\\s+", ""),pos);
+									compute_index(s,pos);
+									System.out.println(s);
 								}
 							}
 							else{
 								//one matching
+								tag = pos_list.get(j).tag;
+								System.out.println(tag);
 								s = pos_list.get(j).token;
-								compute_index(s.replace("#","").replaceAll("\\s+", ""),pos);
+								compute_index(s,pos);
+								System.out.println(s);
 							}
 						}
 						else if(pos_list.get(j).tag.compareTo("UH")==0){
+							tag = pos_list.get(j).tag;
+							System.out.println(tag);
 							s = pos_list.get(j).token;
-							compute_index(s.replace("#","").replaceAll("\\s+", ""),pos);
+							compute_index(s,pos);
+							System.out.println(s);
 						}
 					}
 				}
