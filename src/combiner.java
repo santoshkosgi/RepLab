@@ -20,7 +20,7 @@ public class combiner{
 		
 		while(true){
 			
-			File folder = new File("/home/santoshkosgi/Downloads/replab/");
+			File folder = new File("/home/santoshkosgi/Downloads/replab/out3");
 			File[] listOfFiles = folder.listFiles(); 
 			int file_index=1;
 			//System.out.println(listOfFiles.length);
@@ -32,12 +32,12 @@ public class combiner{
 				second_check = 0;
 				first_check = 0;
 				System.out.println(i);
-				fis = new FileInputStream("/home/santoshkosgi/Downloads/replab/"+(i)+".txt");
+				fis = new FileInputStream("/home/santoshkosgi/Downloads/replab/out3/"+(i)+".txt");
 				br = new BufferedReader(new InputStreamReader(fis));
-				fis1 = new FileInputStream("/home/santoshkosgi/Downloads/replab/"+(i+1)+".txt");
+				fis1 = new FileInputStream("/home/santoshkosgi/Downloads/replab/out3/"+(i+1)+".txt");
 				br1 = new BufferedReader(new InputStreamReader(fis1));
 				Writer output;
-				output = new BufferedWriter(new FileWriter("/home/santoshkosgi/Downloads/replab/temp.txt", true));
+				output = new BufferedWriter(new FileWriter("/home/santoshkosgi/Downloads/replab/out3/temp.txt", true));
 				first = br.readLine();
 				second = br1.readLine();
 				while(true){
@@ -66,7 +66,7 @@ public class combiner{
 					else if(first.split("\\{")[0].compareToIgnoreCase(second.split("\\{")[0])==0){
 						//System.out.println(second.split("\\{")[0]);
 						
-						output.append(first+","+second.split("\\{")[1]+"\n");
+						output.append(first+"@"+second.split("\\{")[1]+"\n");
 						
 						if((first=br.readLine())!=null)
 						{
@@ -105,12 +105,12 @@ public class combiner{
 				br1.close();
 				
 				output.close();
-				File f1=new File("/home/santoshkosgi/Downloads/replab/"+(i)+".txt");
+				File f1=new File("/home/santoshkosgi/Downloads/replab/out3/"+(i)+".txt");
 				f1.delete();
-				File f2=new File("/home/santoshkosgi/Downloads/replab/"+(i+1)+".txt");
+				File f2=new File("/home/santoshkosgi/Downloads/replab/out3/"+(i+1)+".txt");
 				f2.delete();
-				File old = new File("/home/santoshkosgi/Downloads/replab/temp.txt");
-				File new1 = new File("/home/santoshkosgi/Downloads/replab/"+file_index+".txt");
+				File old = new File("/home/santoshkosgi/Downloads/replab/out3/temp.txt");
+				File new1 = new File("/home/santoshkosgi/Downloads/replab/out3/"+file_index+".txt");
 				old.renameTo(new1);
 				file_index++;
 			}

@@ -1,0 +1,30 @@
+companies-Apple,microsoft,google,samsung,Sony
+
+Apple products:
+1.ipod nano
+2.ipod touch
+3.iphone
+
+
+Google products:
+1.Google maps
+2.Google chrome
+3.Google glass
+
+Microsoft products:
+1.Microsoft bing
+2.windows
+3.microsoft visual
+
+samsung products:
+1.samsung galaxy
+2.galaxy tab
+3.samsung smart tv
+
+
+sony products
+1.sony vaio
+2.sony tablet
+3.sony xperia
+
+
